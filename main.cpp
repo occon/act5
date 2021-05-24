@@ -1,6 +1,6 @@
 //
 //  main.cpp
-//
+//  Tarea 01 _ Herencia
 //  Created by Lydia Delgado Uriarte & Hugo Edgar Palomares Estrella on 14/05/21.
 //
 
@@ -12,7 +12,7 @@
 using namespace std;
 
 //Función para crear personaje
-void CrearPersonaje(ArrowWoman listaarrow[], Genius listagenius[], LaserMan listalaser[], int pjcreado,int l, int g, int a){
+void CrearPersonaje(ArrowWoman listaarrow[], Genius listagenius[], LaserMan listalaser[], int pjcreado, int a, int b, int c){
     string nombre,clase;
     int ans=0, prof=0;
     int i=pjcreado;
@@ -40,81 +40,73 @@ void CrearPersonaje(ArrowWoman listaarrow[], Genius listagenius[], LaserMan list
         if (prof== 1 ){
             cout << "Estas seguro que quieres que tu personaje sea un ArrowWoman? Escribe 1 si tu respuesta es si, cualquier otro caracter es no" << endl;
             cin >> ans;
-            if (ans==1){
-                a++;
-            }
         }
         else if(prof==2){
             cout << "Estas seguro que quieres que tu personaje sea un Genius ? Escribe 1 si tu respuesta es si, cualquier otro caracter si es no" << endl;
             cin >> ans;
-            if (ans==2){
-                g++;
-            }
-        }
+        }        
         else if(prof==3){
             cout << "Estas seguro que quieres que tu personaje sea un LaserMan? Escribe 1 si tu respuesta es si, cualquier otro caracter si es no" << endl;
             cin >> ans;
-            if (ans==3){
-                l++;
-            }
         }
         else{
             cout << "Escoge una opción valida" << endl ;
         }
     }
     if (prof==1){
-        listaarrow[i].setNumArrows(10);
-        listaarrow[i].setNombre(nombre);
-        listaarrow[i].setNivel(1);
+        listaarrow[a].setNumArrows(10);
+        listaarrow[a].setNombre(nombre);
+        listaarrow[a].setNivel(1);
     }
     
     else if (prof==2){
-        listagenius[i].setNumAnswers(5);
-        listagenius[i].setNombre(nombre);
-        listagenius[i].setNivel(2);
+        listagenius[b].setNumAnswers(5);
+        listagenius[b].setNombre(nombre);
+        listagenius[b].setNivel(2);
+        b++;
     }
     else{
-        listalaser[i].setNumCharges(20);
-        listalaser[i].setNombre(nombre);
-        listalaser[i].setNivel(3);
+        listalaser[c].setNumCharges(20);
+        listalaser[c].setNombre(nombre);
+        listalaser[c].setNivel(3);
+        c++;
     }
   
     ans=0;
 
    
 }
-
     
 
 
 //Función para mostrar personaje
-void MostrarPersonajes(ArrowWoman listaarrow[], Genius listagenius[], LaserMan listalaser[], int pjcreado, int l, int g, int a){
+void MostrarPersonajes(ArrowWoman listaarrow[], Genius listagenius[], LaserMan listalaser[], int pjcreado,int a,int b,int c){
+    cout << a << endl;
     cout << endl << "\tLista de personajes\t" << endl;
+    cout << "----------------------------------------" << endl;
+    cout << "\t  Arrow Women" << endl;
     for (int i=0 ; i<a; i++){
-        cout << "----------------------------" << endl;
         listaarrow[i].imprime();
-        cout << "----------------------------"<<endl;
     }
-    for (int i=0 ; i<g; i++){
-        cout << "----------------------------" << endl;
+    cout << endl;
+    cout << "\t Geniuses" << endl;
+    for (int i=0 ; i<b; i++){
         listagenius[i].imprime();
-        cout << "----------------------------"<<endl;
     }
-    for (int i=0 ; i<l; i++){
-        cout << "----------------------------" << endl;
+    cout << endl;
+    cout << "\t LaserMen" << endl;
+    for (int i=0 ; i<c; i++){
         listalaser[i].imprime();
-        cout << "----------------------------"<<endl;
     }
 }
 
 int main(){
-    int Pjcreado=0, l=0,g=0,a=0;
+    int Pjcreado=0, a=0, b=0, c=0; 
     char opcion, o='1';
-    ArrowWoman arrowpj[100];
-    Genius geniuspj[100];
-    LaserMan laserpj[100];
+    ArrowWoman arrowpj[a];
+    Genius geniuspj[b];
+    LaserMan laserpj[c];
     
-    //Inventario arregloeq[100];
     do{
         cout << endl;
         cout << " ________________________________" << endl;
@@ -131,11 +123,21 @@ int main(){
         switch (opcion){
             case '1':
                 while (o != '*'){
-                    CrearPersonaje(arrowpj, geniuspj, laserpj,Pjcreado,l,g,a);
+                    CrearPersonaje(arrowpj, geniuspj, laserpj,Pjcreado, a, b, c);
                     Pjcreado++;
+                    if (arrowpj[a].getNumArrows()==10){
+                        a++;
+                    }
+                    else if (geniuspj[b].getNumAnswers()==5){
+                        b++;
+                    }
+                    else if (laserpj[c].getNumCharges()==20){
+                        c++;
+                    };
                     cout << "Ingresa * para dejar de agregar personajes, cualquier otro caracter para seguir agregando" << endl;
                     cin >> o;
                 }
+                o='1';
                 break;
                
             case '2':
@@ -143,7 +145,7 @@ int main(){
                     cout << "No has creado ningún personaje" << endl;
                 }
                 else {
-                    MostrarPersonajes(arrowpj, geniuspj, laserpj,Pjcreado,l,g,a);
+                    MostrarPersonajes(arrowpj, geniuspj, laserpj,Pjcreado,a,b,c);
                 }
                 break;
              
